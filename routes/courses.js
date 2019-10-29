@@ -2,16 +2,19 @@ const { Router } = require('express');
 const models = require('../models')
 const sequelize = require('sequelize')
 const Op = sequelize.Op;
+const CourseController = require('../controllers/CourseController');
 
 const router = Router();
 
-router.get('/:code', function(req, res, next) {
-    const code = req.params.code;
-    models.Courses.findOne( {where: {code: code}} )
-    .then( course => {
-        res.send( { course: course } );
-    });
-});
+router.get('/:code', CourseController.getCourse);
+
+// router.get('/:code', function(req, res, next) {
+//     const code = req.params.code;
+//     models.Courses.findOne( {where: {code: code}} )
+//     .then( course => {
+//         res.send( { course: course } );
+//     });
+// });
 
 router.get('/search/:search', function(req, res, next){
     let search = req.params.search;
