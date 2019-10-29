@@ -1,17 +1,12 @@
-'use strict'
+'use strict';
 module.exports = (sequelize, DataTypes) => {
-    return sequelize.define('memo', {
-        course_code: {
-            type: DataTypes.STRING,
-        },
-        title: {
-            type: DataTypes.STRING
-        },
-        content:{
-            type: DataTypes.STRING
-        },
-    },
-    {
-        timestamps: false
-    })
-}
+  const memo = sequelize.define('memo', {
+    course_code: DataTypes.STRING,
+    title: DataTypes.STRING,
+    content: DataTypes.STRING
+  }, {});
+  memo.associate = function(models) {
+    // associations can be defined here
+  };
+  return memo;
+};

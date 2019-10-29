@@ -1,14 +1,16 @@
 const { Router } = require('express');
-const { Course } = require('../models/courses')
-const memo = require('./memo');
+const models = require('../models')
+const sequelize = require('sequelize')
+const Op = sequelize.Op;
+//const memo = require('./memo');
 
 const router = Router();
 
-router.use('/memo', memo)
+//router.use('/memo', memo)
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  Course.findAll()
+  models.Courses.findAll()
   .then((courses) => { 
     res.render('index', 
     { 
