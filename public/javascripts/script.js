@@ -4,7 +4,13 @@ $('.card-lecture').click(function(e) {
   fetch(url)
   .then(res => res.json())
   .then(res =>{
-    console.log(res);
+    console.log(res.course);
+    const course = res.course
+    $('.modal-body > .lecture-title').text(course.lecture);
+    $('#time').html(`강의 시간 : ${course.start_time}:00 - ${course.end_time}:50 | (${course.dayofweek})`);
+    $('#code').html(`교과목 코드 : ${course.code}`);
+    $('#professor').html(`담당 교수 : ${course.professor}`);
+    $('#location').html(`강의실 : ${course.location}`);
     $('#modal-lecture-info').modal('show');
   });
   });
