@@ -2,7 +2,7 @@
 
 module.exports = {
   up: queryInterface => queryInterface.sequelize.query(`
-    INSERT INTO courses(code, lecture, professor, location, start_time, end_time, dayofweek) VALUES
+    INSERT INTO Courses(code, lecture, professor, location, start_time, end_time, dayofweek) VALUES
     ('PG1807-01', 'WorldWideEnglish1','김영순', 'A동403', 10, 12, '월금'),
     ('PG1807-02','커뮤니케이션영어1','이영희','A동203',9,10,'월'),
     ('PG1807-03','대학수학1','박정희','B동102',13,15,'화'),
@@ -55,6 +55,7 @@ module.exports = {
     ('PG1807-50','국제관계론','김영미','A동415',9,10,'목금');`)
   ,
   down: (queryInterface, Sequelize) => {
+    return queryInterface.bulkDelete('Courses', null, {});
     /*
       Add reverting commands here.
       Return a promise to correctly handle asynchronicity.

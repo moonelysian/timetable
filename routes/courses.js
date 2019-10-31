@@ -5,5 +5,5 @@ const router = Router();
 
 router.get('/course/:code', CourseController.getCourse);
 router.get('/search', CourseController.getSearchData);
-  
-  module.exports = router;
+
+module.exports = router;

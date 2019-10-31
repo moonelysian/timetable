@@ -1,17 +1,24 @@
-$('.list-lecture').on('click', 'li' ,function(e) {
-    const code = $(this).attr('data-code');
-    const url = `/courses/course/${code}`;
-    fetch(url)
-    .then(res => res.json())
-    .then(res =>{
-      const course = res.course;
-      $('.modal-body > .lecture-title').text(course.lecture);
-      $('#time').text(`강의 시간 : ${course.start_time}:00 - ${course.end_time}:00 | (${course.dayofweek})`);
-      $('#code').text(`교과목 코드 : ${course.code}`);
-      $('#professor').text(`담당 교수 : ${course.professor}`);
-      $('#location').text(`강의실 : ${course.location}`);
-      $('#modal-lecture-info').modal('show');
-    });
+// $('.list-lecture').on('click', 'li' ,function(e) {
+$('.list-lecture').click(function(e){
+    const tag = e.target.tagName;
+    const whitelist = ['LI','SPAN','H6','A']
+    if(!whitelist.includes(tag)) return;
+    else{
+      const code = $(e.target).closest('li.card-lecture').attr('data-code');
+      const url = `/courses/course/${code}`;
+      fetch(url)
+      .then(res => res.json())
+      .then(res =>{
+        const course = res.course;
+        $('.modal-body > .lecture-title').text(course.lecture);
+        $('#time').text(`강의 시간 : ${course.start_time}:00 - ${course.end_time}:00 | (${course.dayofweek})`);
+        $('#code').attr('data-code', course.code);
+        $('#code').text(`교과목 코드 : ${course.code}`);
+        $('#professor').text(`담당 교수 : ${course.professor}`);
+        $('#location').text(`강의실 : ${course.location}`);
+        $('#modal-lecture-info').modal('show');
+      });
+    }
 });
   
 $('.lecture-time > a').click(function () {
@@ -57,5 +64,21 @@ $('.form-control').on("propertychange change keyup paste input", function(){
           </ul>
         </li>`)
     })
+  })
+});
+
+$('.submit').click(function(){
+  const code = $('#code').attr('data-code');
+  const url = `/timetable`;
+  fetch(url, {
+    method: 'POST',
+    body: {
+      code: code
+    }
+  })
+  .then(res=> res.json())
+  .then(res => {
+    const message = '등록되었습니다';
+    alert(message);
   })
 });

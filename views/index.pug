@@ -194,26 +194,22 @@ block content
             li.lecture-time
               i.material-icons.ic-lecture-info access_alarm
               span#time
-              //- span 강의 시간 : 09:00 - 10:50 | (월), (수)
             li.lecture-code
               i.material-icons.ic-lecture-info code
               span#code
-              //- 교과목 코드 : A0000001
             li.lecture-code
               i.material-icons.ic-lecture-info school
               span#professor
-              //- 담당 교수 : 김진수
             li.lecture-code
               i.material-icons.ic-lecture-info business
               span#location
-              //- 강의실 : 
           .lecture-description
             p.txt-description
               | 본 강의에서는 JSP를 이용한 웹 기반 프로그래밍 기초 및 응용기술에 대해 학습합니다. 특히 실습 위주의 수업으로 프로그래밍 스킬 향상 및
               | 실무 능력을 갖출 수 있도록 합니다.
         .modal-footer
           button.btn.btn-light(type='button', data-dismiss='modal') 취소
-          button.btn.btn-primary(type='button') 과목 등록하기
+          button.btn.btn-primary.submit(type='button') 과목 등록하기
   #modal-lecture-task.modal.fade(role='dialog', aria-hidden='true')
     .modal-dialog(role='document')
       .modal-content

@@ -2,7 +2,7 @@
 
 module.exports = {
   up: queryInterface => queryInterface.sequelize.query(`
-  CREATE TABLE IF NOT EXISTS courses (
+  CREATE TABLE IF NOT EXISTS Courses (
     code VARCHAR(225) CHARACTER SET utf8,
     lecture VARCHAR(225) CHARACTER SET utf8,
     professor VARCHAR(225) CHARACTER SET utf8,
@@ -13,6 +13,7 @@ module.exports = {
   );`)
   ,
   down: (queryInterface, Sequelize) => {
+    return queryInterface.dropTable('Courses');
     /*
       Add reverting commands here.
       Return a promise to correctly handle asynchronicity.
