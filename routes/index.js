@@ -1,11 +1,9 @@
 const { Router } = require('express');
-const models = require('../models')
-const sequelize = require('sequelize')
+const models = require('../models');         
 const courses = require('./courses');
 //const memo = require('./memo');
 
 const router = Router();
-
 router.use('/courses', courses)
 //router.use('/memo', memo)
 
