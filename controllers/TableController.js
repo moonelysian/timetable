@@ -12,10 +12,9 @@ const createTable = function(req, res){
     }
     try{
         const callback = (checkData) => {
-            console.log(checkData)
             if (checkData) {
                 models.Timetable.create(insertData) 
-                .then(result => res.redirect('/'))
+                .then(result => res.send({ message: '등록되었습니다' }))
             } else {
                 res.send({ message: '이미 등록된 과목입니다' });
             }
@@ -26,7 +25,14 @@ const createTable = function(req, res){
     }
 }
 
-const checkTable = function(insertData){
+const deleteTable =function(req, res){
+    const code = req.params.course_code;
+    models.Timetable.destroy({ where: { course_code: code }})
+    .then(res => res.redirect('/'))
+
+}
+
+const checkTable = function(insertData, callback){
     models.Timetable.findOne({where: {course_code: insertData.course_code}})
     .then(result => {
         if(result) return false;
@@ -36,6 +42,9 @@ const checkTable = function(insertData){
                     [Op.and]:[
                         { course_start: insertData.course_start },
                         { course_day: {[Op.like]: "%" + insertData.course_day + "%"} }
+                    ],
+                    [Op.or]:[
+                        
                     ]
                 }
             })
@@ -44,10 +53,14 @@ const checkTable = function(insertData){
                 if(result) return false;
                 else return true;
             })
+            .then(res => {
+                callback(res);
+            })
         }
     })
 }
 
 module.exports = {
-    createTable
+    createTable,
+    deleteTable
 }

@@ -91,6 +91,7 @@ $('.submit').click(function(){
   })
   .then(res=> res.json())
   .then(res => {
+    console.log(res);
     alert(res.message);
   })
 });
