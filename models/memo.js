@@ -5,7 +5,9 @@ module.exports = (sequelize, DataTypes) => {
     title: DataTypes.STRING,
     content: DataTypes.STRING
   }, {
-      timestamps: false
+      timestamps: false,
+      charset: 'utf8',
+      collate: 'utf8_unicode_ci'
   });
   memo.associate = function(models) {
     memo.belongsTo(models.Timetable,{

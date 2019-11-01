@@ -16,15 +16,9 @@ const getSearchData = function(req, res){
         models.Courses.findAll({
             where:{
                 [Op.or]:[
-                    {
-                        code: { [Op.like]: "%" + inputData + "%" }
-                    },
-                    {
-                        lecture: { [Op.like]: "%" + inputData + "%" }
-                    },
-                    {
-                        professor:{ [Op.like]: "%" + inputData + "%" }
-                    },
+                    { code: { [Op.like]: "%" + inputData + "%" } },
+                    { lecture: { [Op.like]: "%" + inputData + "%" } },
+                    { professor:{ [Op.like]: "%" + inputData + "%" } },
                 ]
             }
         })

@@ -11,38 +11,37 @@ const createTable = function(req, res){
         course_day: body.course_day
     }
     try{
-        if(checkTable(insertData)){
-            models.Timetable.create(insertData) 
-            .then(result => res.redirect('/'))
+        const callback = (checkData) => {
+            console.log(checkData)
+            if (checkData) {
+                models.Timetable.create(insertData) 
+                .then(result => res.redirect('/'))
+            } else {
+                res.send({ message: '이미 등록된 과목입니다' });
+            }
         }
-        else{
-            console.log('AAAAAAA')
-            res.send({ message: '이미 등록된 과목입니다' });
-        }
-    }catch(err){
-        console.log(err)
+        checkTable(insertData, callback);
+    } catch(err){
+        console.log(err);
     }
 }
 
-let checkTable = function(insertData){
+const checkTable = function(insertData){
     models.Timetable.findOne({where: {course_code: insertData.course_code}})
     .then(result => {
-        if(result){
-            return false;
-        }
+        if(result) return false;
         else{
-            models.Courses.findOne({where: {
-                [Op.and]:[
-                    {
-                        start_time: insertData.course_start
-                    },
-                    {
-                        dayofweek: {[Op.like]: "%" + insertData.course_day + "%"}
-                    }
-                ]
-            }})
+            models.Timetable.findOne({ 
+                where: {
+                    [Op.and]:[
+                        { course_start: insertData.course_start },
+                        { course_day: {[Op.like]: "%" + insertData.course_day + "%"} }
+                    ]
+                }
+            })
             .then(result => {
-                if(result.code == insertData.course_code) return false;
+                console.log(result);
+                if(result) return false;
                 else return true;
             })
         }

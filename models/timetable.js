@@ -5,7 +5,9 @@ module.exports = (sequelize, DataTypes) => {
     course_start: DataTypes.INTEGER,
     course_day: DataTypes.STRING
   }, {
-      timestamps: false
+      timestamps: false,
+      charset: 'utf8',
+      collate: 'utf8_unicode_ci'
   });
   timetable.associate = function(models) {
     timetable.hasMany(models.Memo);
