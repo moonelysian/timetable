@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
     content: DataTypes.STRING
   }, {});
   memo.associate = function(models) {
-    memo.belongsTo(models.timetable,{
+    memo.belongsTo(models.Timetable,{
         foreignKey: 'tableId'
     })
   };

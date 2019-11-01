@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
     course_code: DataTypes.STRING
   }, {});
   timetable.associate = function(models) {
-    timetable.hasMany(models.memo);
+    timetable.hasMany(models.Memo);
   };
   return timetable;
 };
