@@ -10,27 +10,21 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       course_code: {
+        allowNull: false,
         type: Sequelize.STRING
       },
-      createdAt: {
+      course_start:{
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.INTEGER
       },
-      updatedAt: {
+      course_day:{
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.STRING
       }
     });
   },
 
   down: (queryInterface, Sequelize) => {
     return queryInterface.dropTable('Timetable');
-    /*
-      Add reverting commands here.
-      Return a promise to correctly handle asynchronicity.
-
-      Example:
-      return queryInterface.dropTable('users');
-    */
   }
 };

@@ -17,26 +17,11 @@ module.exports = {
       },
       content: {
         type: Sequelize.STRING
-      },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
       }
     });
   },
 
   down: (queryInterface, Sequelize) => {
     return queryInterface.dropTable('Memo');
-    /*
-      Add reverting commands here.
-      Return a promise to correctly handle asynchronicity.
-
-      Example:
-      return queryInterface.dropTable('users');
-    */
   }
 };

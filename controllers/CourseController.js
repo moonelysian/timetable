@@ -17,19 +17,13 @@ const getSearchData = function(req, res){
             where:{
                 [Op.or]:[
                     {
-                        code: {
-                            [Op.like]: "%" + inputData + "%"
-                        }
+                        code: { [Op.like]: "%" + inputData + "%" }
                     },
                     {
-                        lecture: {
-                            [Op.like]: "%" + inputData + "%"
-                        }
+                        lecture: { [Op.like]: "%" + inputData + "%" }
                     },
                     {
-                        professor: {
-                            [Op.like]: "%" + inputData + "%"
-                        }
+                        professor:{ [Op.like]: "%" + inputData + "%" }
                     },
                 ]
             }

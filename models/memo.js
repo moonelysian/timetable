@@ -4,7 +4,9 @@ module.exports = (sequelize, DataTypes) => {
     tableId: DataTypes.STRING,
     title: DataTypes.STRING,
     content: DataTypes.STRING
-  }, {});
+  }, {
+      timestamps: false
+  });
   memo.associate = function(models) {
     memo.belongsTo(models.Timetable,{
         foreignKey: 'tableId'
