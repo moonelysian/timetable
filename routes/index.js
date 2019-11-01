@@ -2,6 +2,7 @@ const { Router } = require('express');
 const models = require('../models');         
 const courses = require('./courses');
 const timetables = require('./timetables');
+const sequelize = require('sequelize')
 //const memo = require('./memo');
 
 const router = Router();
@@ -13,14 +14,16 @@ router.use('/timetable', timetables)
 router.get('/', function(req, res, next) {
   models.Courses.findAll()
   .then(courses => {
-    res.render('index', 
-    { 
-      title: 'programmers 과제 테스트 템플릿 - Node.js', 
-      courses: courses
-    }); 
-  });
-  // models.Timetable.findAll()
-  // .then(time)
+    models.Timetable.findAll()
+    .then(timetable => {
+      res.render('index', 
+      { 
+        title: 'programmers 과제 테스트 템플릿 - Node.js', 
+        courses: courses,
+        timetable: timetable
+      }); 
+    }) 
+  })
 });
 
 module.exports = router;

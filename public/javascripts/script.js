@@ -11,8 +11,6 @@ $('.list-lecture').click(function(e){
         const course = res.course;
         $('.modal-body > .lecture-title').text(course.lecture);
         
-        $('#time').attr('data-startTime', course.start_time)
-        $('#time').attr('data-dayofweek', course.dayofweek)
         $('#time').text(`강의 시간 : ${course.start_time}:00 - ${course.end_time}:00 | (${course.dayofweek})`);
         
         $('#code').attr('data-code', course.code);
@@ -73,21 +71,13 @@ $('.form-control').on("propertychange change keyup paste input", function(){
 
 $('.submit').click(function(){
   const course_code = $('#code').attr('data-code');
-  const start_time = $('#time').attr('data-startTime');
-  const dayofweek =$('#time').attr('data-dayofweek')
   const url = `/timetable`;
   fetch(url, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(
-      { 
-        code: course_code,
-        course_start: start_time,
-        course_day: dayofweek
-      }
-    )
+    body: JSON.stringify( { code: course_code } )
   })
   .then(res=> res.json())
   .then(res => {

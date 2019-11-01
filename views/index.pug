@@ -79,12 +79,14 @@ block content
               li.timeline-vertical
                 .top-info.today
                   h4.day Mon
+              each t in timetable
                 ul
-                  li.lecture-time.two-hr.hr-11(data-event='lecture-01')
+                if (t.course_day).substring('월')
+                  li.lecture-time.two-hr.hr-11(data-event=`lecture-#{01}`)
                     a(href='#')
                       .lecture-info
-                        h6.lecture-title 웹 프로그래밍
-                        h6.lecture-location 공학관 204
+                        h6.lecture-title #{t.course_lecture}
+                        h6.lecture-location #{t.course_location} 
                       .lecture-noti(data-toggle='tooltip', data-placement='top', title='', data-original-title='과제 설명 텍스트 과제 설명 텍스트 과제 설명 텍스트')
                         i.material-icons.ic-lecture-noti assignment
                         span.lecture-noti-title 과제 제목 텍스트
@@ -101,8 +103,8 @@ block content
                       .lecture-info
                         h6.lecture-title 논리 설계
                         h6.lecture-location 공학1관 102
-              li.timeline-vertical
-                .top-info
+              li.timeline-vertical.tue
+                .top-info.tue
                   h4.day Tue
                 ul
                   li.lecture-time.two-hr.hr-10(data-event='lecture-04')
@@ -120,10 +122,10 @@ block content
                       .lecture-info
                         h6.lecture-title 컴퓨터 네트워크
                         h6.lecture-location 공학1관 102
-              li.timeline-vertical
+              li.timeline-vertical.wed
                 .top-info
                   h4.day Wed
-                ul
+                ul.wed
                   li.lecture-time.two-hr.hr-10(data-event='lecture-01')
                     a(href='#')
                       .lecture-info
@@ -143,7 +145,7 @@ block content
                         i.material-icons.ic-lecture-noti assignment
                         span.lecture-noti-title 과제 제목 텍스트
               li.timeline-vertical
-                .top-info
+                .top-info.thu
                   h4.day Thu
                 ul
                   li.lecture-time.two-hr.hr-10(data-event='lecture-04')
@@ -165,7 +167,7 @@ block content
                         h6.lecture-title 데이터베이스
                         h6.lecture-location 공학1관 102
               li.timeline-vertical
-                .top-info
+                .top-info.fri
                   h4.day Fri
                 ul
                   li.lecture-time.hr-10(data-event='lecture-09')

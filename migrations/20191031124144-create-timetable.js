@@ -13,8 +13,20 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
+      course_name:{
+        type: Sequelize.STRING
+      },
+      course_professor:{
+        type: Sequelize.STRING
+      },
+      course_location:{
+        type: Sequelize.STRING
+      },
       course_start:{
         allowNull: false,
+        type: Sequelize.INTEGER
+      },
+      course_end:{
         type: Sequelize.INTEGER
       },
       course_day:{
