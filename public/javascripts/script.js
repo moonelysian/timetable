@@ -1,3 +1,5 @@
+//import { Json } from "sequelize/types/lib/utils";
+
 // $('.list-lecture').on('click', 'li' ,function(e) {
 $('.list-lecture').click(function(e){
     const tag = e.target.tagName;
@@ -68,13 +70,12 @@ $('.form-control').on("propertychange change keyup paste input", function(){
 });
 
 $('.submit').click(function(){
-  const code = $('#code').attr('data-code');
+  const course_code = $('#code').attr('data-code');
   const url = `/timetable`;
   fetch(url, {
     method: 'POST',
-    body: {
-      code: code
-    }
+    headers : new Headers(),
+    body: JSON.stringify({ code: course_code})
   })
   .then(res=> res.json())
   .then(res => {
