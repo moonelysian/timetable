@@ -52,33 +52,8 @@ $(function () {
     html: true,
     placement: 'right',
     sanitize: false,
-    content: function () {
-    return $("#PopoverContent").html();
-    }
+    content: $("#PopoverContent").html()
   });
-  $('.submit-memo').click(function(){
-    console.log("test")
-    const title = $('#recipient-name').val();
-    const content = $('#message-text').val();
-    const tableId = $('#lecture-code').attr('data-lecture')
-    const url = '/memos'
-    fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        title: title,
-        content: content,
-        tableId: tableId
-        })
-    })
-    .then(res=>res.json())
-    .then(res => {
-      console.log(res)
-    })
-  })
-  
 });
 
 $('.form-control').on("propertychange change keyup paste input", function(){
@@ -135,25 +110,36 @@ $('.delete-lecture').click(function(){
     })
 })
 
-$('.submit-memo').click(function(){
-  console.log("test")
-  const title = $('#recipient-name').val();
-  const content = $('#message-text').val();
+$(document).on('click', '.submit-memo', function(){
+  const title = $('#PopoverContent').find('#recipient-name').value;
+  const content = document.getElementById('message-text').value;
   const tableId = $('#lecture-code').attr('data-lecture')
   const url = '/memos'
-  fetch(url, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      title: title,
-      content: content,
-      tableId: tableId
-      })
-  })
-  .then(res=>res.json())
-  .then(res => {
-    console.log(res)
-  })
+  console.log($('#PopoverContent').find('#recipient-name'));
+  // fetch(url, {
+  //   method: 'POST',
+  //   headers: {
+  //     'Content-Type': 'application/json',
+  //   },
+  //   body: JSON.stringify({
+  //     title: title,
+  //     content: content,
+  //     tableId: tableId
+  //     })
+  // })
+  // .then(res=>res.json())
+  // .then(res => {
+  //   console.log(res)
+  // })
 })
+
+// $('#delete-memo').click(function(){
+//   const memoId;
+//   const url = `/memos/${memoId}`;
+//   fetch(url, {method: 'DELETE'})
+//   .then(res=> res.json())
+//   .then(res => {
+//     alert(res.message);
+//     location.reload();
+//   })
+// })

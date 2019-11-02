@@ -4,7 +4,7 @@ const Op = sequelize.Op;
 
 const getTable = function(req, res){
     const tableId = parseInt(req.params.tableId);
-    models.Timetable.findOne({where: {id: tableId}})
+    models.Timetables.findOne({where: {id: tableId}})
     .then( result => {
         res.send({ course: result })
     })
@@ -29,7 +29,7 @@ const createTable = function(req, res){
         try{
             const callback = (checkData) => {
                 if (checkData) {
-                    models.Timetable.create(insertData) 
+                    models.Timetables.create(insertData) 
                     .then(result => res.send({ message: '등록되었습니다' }))
                 } else {
                     res.send({ message: '등록이 불가합니다' });
@@ -54,11 +54,11 @@ const checkTable = function(insertData, callback){
         days[1] = days[0];
     }
     console.log(days)
-    models.Timetable.findOne({where: {course_code: insertData.course_code}})
+    models.Timetables.findOne({where: {course_code: insertData.course_code}})
     .then(result => {
         if(result) return false;
         else{
-            models.Timetable.findOne({ 
+            models.Timetables.findOne({ 
                 where: {
                     [Op.and]:[
                         { 

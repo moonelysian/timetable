@@ -1,6 +1,6 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const memo = sequelize.define('Memo', {
+  const memos = sequelize.define('Memos', {
     tableId: DataTypes.STRING,
     title: DataTypes.STRING,
     content: DataTypes.STRING
@@ -9,10 +9,10 @@ module.exports = (sequelize, DataTypes) => {
       charset: 'utf8',
       collate: 'utf8_unicode_ci'
   });
-  memo.associate = function(models) {
-    memo.belongsTo(models.Timetable,{
+  memos.associate = function(models) {
+    memos.belongsTo(models.Timetables,{
         foreignKey: 'tableId'
     })
   };
-  return memo;
+  return memos;
 };

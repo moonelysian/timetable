@@ -14,13 +14,13 @@ const createMemo = function(req, res){
         title: req.body.title,
         content: req.body.content
     }
-    models.Memo.create(memo)
+    models.Memos.create(memo)
     .then(result => res.send({ message: '등록되었습니다' }))
 }
 
 const deleteMemo = function(req, res){
     const id = req.params.memoId;
-    models.Memo.destroy({ where: {id: id} })
+    models.Memos.destroy({ where: {id: id} })
     .then(result => res.send({ message: '삭제되었습니다'}))
 }
 

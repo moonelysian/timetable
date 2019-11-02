@@ -1,6 +1,6 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const timetable = sequelize.define('Timetable', {
+  const timetables = sequelize.define('Timetables', {
     course_code: DataTypes.STRING,
     course_name: DataTypes.STRING,
     course_professor: DataTypes.STRING,
@@ -14,8 +14,8 @@ module.exports = (sequelize, DataTypes) => {
       charset: 'utf8',
       collate: 'utf8_unicode_ci'
   });
-  timetable.associate = function(models) {
-    timetable.hasMany(models.Memo);
+  timetables.associate = function(models) {
+    timetables.hasMany(models.Memos);
   };
-  return timetable;
+  return timetables;
 };
