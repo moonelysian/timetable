@@ -2,6 +2,14 @@ const sequelize = require('sequelize')
 const models = require('../models')
 const Op = sequelize.Op;
 
+const getTable = function(req, res){
+    const tableId = parseInt(req.params.tableId);
+    models.Timetable.findOne({where: {id: tableId}})
+    .then( result => {
+        res.send({ course: result })
+    })
+}
+
 const createTable = function(req, res){
     const body = req.body;
     models.Courses.findOne({where: {code: body.code}})
@@ -35,9 +43,9 @@ const createTable = function(req, res){
 }
 
 const deleteTable =function(req, res){
-    const code = req.params.course_code;
-    models.Timetable.destroy({ where: { course_code: code }})
-    .then(res => res.redirect('/'))
+    const id = req.body.id;
+    models.Timetable.destroy({ where: { id: id }})
+    .then( result => res.send({message: '삭제되었습니다'}))
 }
 
 const checkTable = function(insertData, callback){
@@ -58,7 +66,6 @@ const checkTable = function(insertData, callback){
                 else return true;
             })
             .then(res => {
-                console.log(res);
                 callback(res);
             })
         }
@@ -66,6 +73,7 @@ const checkTable = function(insertData, callback){
 }
 
 module.exports = {
+    getTable,
     createTable,
     deleteTable
 }

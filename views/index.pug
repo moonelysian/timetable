@@ -79,110 +79,128 @@ block content
               li.timeline-vertical
                 .top-info.today
                   h4.day Mon
-              each t in timetable
                 ul
-                if (t.course_day).substring('월')
-                  li.lecture-time.two-hr.hr-11(data-event=`lecture-#{01}`)
-                    a(href='#')
-                      .lecture-info
-                        h6.lecture-title #{t.course_lecture}
-                        h6.lecture-location #{t.course_location} 
-                      .lecture-noti(data-toggle='tooltip', data-placement='top', title='', data-original-title='과제 설명 텍스트 과제 설명 텍스트 과제 설명 텍스트')
-                        i.material-icons.ic-lecture-noti assignment
-                        span.lecture-noti-title 과제 제목 텍스트
-                  li.lecture-time.two-hr.hr-13(data-event='lecture-02')
-                    a(href='#')
-                      .lecture-info
-                        h6.lecture-title 프로그래밍의 원리
-                        h6.lecture-location 공학1관 102
-                      .lecture-noti(data-toggle='tooltip', data-placement='top', title='', data-original-title='과제 설명 텍스트 과제 설명 텍스트 과제 설명 텍스트')
-                        i.material-icons.ic-lecture-noti assignment
-                        span.lecture-noti-title 과제 제목 텍스트
-                  li.lecture-time.hr-16(data-event='lecture-03')
-                    a(href='#')
-                      .lecture-info
-                        h6.lecture-title 논리 설계
-                        h6.lecture-location 공학1관 102
+                  each t in timetable
+                    if (t.course_day).indexOf('월')!= -1
+                      - if(t.course_start == 9) t.course_start = '09'
+                      - if((t.course_end - t.course_start)==2)
+                        li(class= "lecture-time two-hr hr-"+t.course_start data-event="lecture-0"+t.id)
+                          a(href='#' data-lecture=t.id)
+                              .lecture-info
+                                h6.lecture-title #{t.course_name}
+                                h6.lecture-location #{t.course_location} 
+                              .lecture-noti(data-toggle='tooltip', data-placement='top', title='', data-original-title='과제 설명 텍스트 과제 설명 텍스트 과제 설명 텍스트')
+                                i.material-icons.ic-lecture-noti assignment
+                                span.lecture-noti-title
+                      - else
+                        li(class= "lecture-time hr-"+t.course_start data-event="lecture-0"+t.id)
+                          a(href='#' data-lecture=t.id)
+                            .lecture-info
+                              h6.lecture-title #{t.course_name}
+                              h6.lecture-location #{t.course_location} 
+                            .lecture-noti(data-toggle='tooltip', data-placement='top', title='', data-original-title='과제 설명 텍스트 과제 설명 텍스트 과제 설명 텍스트')
+                              i.material-icons.ic-lecture-noti assignment
+                              span.lecture-noti-title 과제 제목 텍스트
               li.timeline-vertical.tue
                 .top-info.tue
                   h4.day Tue
                 ul
-                  li.lecture-time.two-hr.hr-10(data-event='lecture-04')
-                    a(href='#')
-                      .lecture-info
-                        h6.lecture-title 자료 구조
-                        h6.lecture-location 공학1관 102
-                  li.lecture-time.hr-12(data-event='lecture-05')
-                    a(href='#')
-                      .lecture-info
-                        h6.lecture-title 알고리즘
-                        h6.lecture-location 공학1관 102
-                  li.lecture-time.hr-16(data-event='lecture-06')
-                    a(href='#')
-                      .lecture-info
-                        h6.lecture-title 컴퓨터 네트워크
-                        h6.lecture-location 공학1관 102
+                  each index, t in timetable
+                    if (t.course_day).indexOf('화')!= -1
+                      - if(t.course_start == 9) t.course_start = '09'
+                      - if((t.course_end - t.course_start)==2)
+                        li(class= "lecture-time two-hr hr-"+t.course_start data-event="lecture-0"+t.id)
+                          a(href='#' data-lecture= t.id)
+                              .lecture-info
+                                h6.lecture-title #{t.course_name}
+                                h6.lecture-location #{t.course_location} 
+                              .lecture-noti(data-toggle='tooltip', data-placement='top', title='', data-original-title='과제 설명 텍스트 과제 설명 텍스트 과제 설명 텍스트')
+                                i.material-icons.ic-lecture-noti assignment
+                                span.lecture-noti-title 과제 제목 텍스트
+                      - else
+                        li(class= "lecture-time hr-"+t.course_start data-event="lecture-0"+index)
+                          a(href='#')
+                            .lecture-info
+                              h6.lecture-title #{t.course_name}
+                              h6.lecture-location #{t.course_location} 
+                            .lecture-noti(data-toggle='tooltip', data-placement='top', title='', data-original-title='과제 설명 텍스트 과제 설명 텍스트 과제 설명 텍스트')
+                              i.material-icons.ic-lecture-noti assignment
+                              span.lecture-noti-title 과제 제목 텍스트
               li.timeline-vertical.wed
                 .top-info
                   h4.day Wed
                 ul.wed
-                  li.lecture-time.two-hr.hr-10(data-event='lecture-01')
-                    a(href='#')
-                      .lecture-info
-                        h6.lecture-title 웹 프로그래밍
-                        h6.lecture-location 공학관 204
-                  li.lecture-time.hr-12(data-event='lecture-07')
-                    a(href='#')
-                      .lecture-info
-                        h6.lecture-title 컴파일러
-                        h6.lecture-location 공학관 602
-                  li.lecture-time.two-hr.hr-13(data-event='lecture-02')
-                    a(href='#')
-                      .lecture-info
-                        h6.lecture-title 프로그래밍의 원리
-                        h6.lecture-location 공학1관 102
-                      .lecture-noti(data-toggle='tooltip', data-placement='top', title='', data-original-title='과제 설명 텍스트 과제 설명 텍스트 과제 설명 텍스트')
-                        i.material-icons.ic-lecture-noti assignment
-                        span.lecture-noti-title 과제 제목 텍스트
+                  each t in timetable
+                    if (t.course_day).indexOf('수')!= -1
+                      - if(t.course_start == 9) t.course_start = '09'
+                      - if((t.course_end - t.course_start)==2)
+                        li(class= "lecture-time two-hr hr-"+t.course_start data-event="lecture-0"+t.id)
+                          a(href='#')
+                              .lecture-info
+                                h6.lecture-title #{t.course_name}
+                                h6.lecture-location #{t.course_location} 
+                              .lecture-noti(data-toggle='tooltip', data-placement='top', title='', data-original-title='과제 설명 텍스트 과제 설명 텍스트 과제 설명 텍스트')
+                                i.material-icons.ic-lecture-noti assignment
+                                span.lecture-noti-title 과제 제목 텍스트
+                      - else
+                        li(class= "lecture-time hr-"+t.course_start data-event="lecture-0"+t.id)
+                          a(href='#')
+                            .lecture-info
+                              h6.lecture-title #{t.course_name}
+                              h6.lecture-location #{t.course_location} 
+                            .lecture-noti(data-toggle='tooltip', data-placement='top', title='', data-original-title='과제 설명 텍스트 과제 설명 텍스트 과제 설명 텍스트')
+                              i.material-icons.ic-lecture-noti assignment
+                              span.lecture-noti-title 과제 제목 텍스트
               li.timeline-vertical
                 .top-info.thu
                   h4.day Thu
                 ul
-                  li.lecture-time.two-hr.hr-10(data-event='lecture-04')
-                    a(href='#')
-                      .lecture-info
-                        h6.lecture-title 자료 구조
-                        h6.lecture-location 공학1관 102
-                      .lecture-noti(data-toggle='tooltip', data-placement='top', title='', data-original-title='과제 설명 텍스트 과제 설명 텍스트 과제 설명 텍스트')
-                        i.material-icons.ic-lecture-noti assignment
-                        span.lecture-noti-title 과제 제목 텍스트
-                  li.lecture-time.hr-12(data-event='lecture-05')
-                    a(href='#')
-                      .lecture-info
-                        h6.lecture-title 알고리즘
-                        h6.lecture-location 공학1관 102
-                  li.lecture-time.hr-15(data-event='lecture-08')
-                    a(href='#')
-                      .lecture-info
-                        h6.lecture-title 데이터베이스
-                        h6.lecture-location 공학1관 102
+                  each t in timetable
+                    if (t.course_day).indexOf('목')!= -1
+                      - if(t.course_start == 9) t.course_start = '09'
+                      - if((t.course_end - t.course_start)==2)
+                        li(class= "lecture-time two-hr hr-"+t.course_start data-event="lecture-0"+t.id)
+                          a(href='#')
+                              .lecture-info
+                                h6.lecture-title #{t.course_name}
+                                h6.lecture-location #{t.course_location} 
+                              .lecture-noti(data-toggle='tooltip', data-placement='top', title='', data-original-title='과제 설명 텍스트 과제 설명 텍스트 과제 설명 텍스트')
+                                i.material-icons.ic-lecture-noti assignment
+                                span.lecture-noti-title 과제 제목 텍스트
+                      - else
+                        li(class= "lecture-time hr-"+t.course_start data-event="lecture-0"+t.id)
+                          a(href='#')
+                            .lecture-info
+                              h6.lecture-title #{t.course_name}
+                              h6.lecture-location #{t.course_location} 
+                            .lecture-noti(data-toggle='tooltip', data-placement='top', title='', data-original-title='과제 설명 텍스트 과제 설명 텍스트 과제 설명 텍스트')
+                              i.material-icons.ic-lecture-noti assignment
+                              span.lecture-noti-title 과제 제목 텍스트
               li.timeline-vertical
                 .top-info.fri
                   h4.day Fri
                 ul
-                  li.lecture-time.hr-10(data-event='lecture-09')
-                    a(href='#')
-                      .lecture-info
-                        h6.lecture-title 데이터 통신
-                        h6.lecture-location 공학1관 102
-                  li.lecture-time.two-hr.hr-12(data-event='lecture-10')
-                    a(href='#')
-                      .lecture-info
-                        h6.lecture-title 운영 체제
-                        h6.lecture-location 공학1관 102
-                      .lecture-noti(data-toggle='tooltip', data-placement='top', title='', data-original-title='과제 설명 텍스트 과제 설명 텍스트 과제 설명 텍스트')
-                        i.material-icons.ic-lecture-noti assignment
-                        span.lecture-noti-title 과제 제목 텍스트
+                  each t in timetable
+                    if (t.course_day).indexOf('금')!= -1
+                      - if(t.course_start == 9) t.course_start = '09'
+                      - if((t.course_end - t.course_start)==2)
+                        li(class= "lecture-time two-hr hr-"+t.course_start data-event="lecture-0"+t.id)
+                          a(href='#' data-code='#{t.course_code}')
+                              .lecture-info
+                                h6.lecture-title #{t.course_name}
+                                h6.lecture-location #{t.course_location} 
+                              .lecture-noti(data-toggle='tooltip', data-placement='top', title='', data-original-title='과제 설명 텍스트 과제 설명 텍스트 과제 설명 텍스트')
+                                i.material-icons.ic-lecture-noti assignment
+                                span.lecture-noti-title 과제 제목 텍스트
+                      - else
+                        li(class= "lecture-time hr-"+t.course_start data-event="lecture-0"+t.id)
+                          a(href='#')
+                            .lecture-info
+                              h6.lecture-title #{t.course_name}
+                              h6.lecture-location #{t.course_location} 
+                            .lecture-noti(data-toggle='tooltip', data-placement='top', title='', data-original-title='과제 설명 텍스트 과제 설명 텍스트 과제 설명 텍스트')
+                              i.material-icons.ic-lecture-noti assignment
+                              span.lecture-noti-title 과제 제목 텍스트
 
   #modal-lecture-info.modal.fade(role='dialog', aria-hidden='true')
     .modal-dialog(role='document')
@@ -211,7 +229,7 @@ block content
               | 실무 능력을 갖출 수 있도록 합니다.
         .modal-footer
           button.btn.btn-light(type='button', data-dismiss='modal') 취소
-          button.btn.btn-primary.submit(type='button') 과목 등록하기
+          button.btn.btn-primary.submit-course(type='button') 과목 등록하기
   #modal-lecture-task.modal.fade(role='dialog', aria-hidden='true')
     .modal-dialog(role='document')
       .modal-content
@@ -219,20 +237,20 @@ block content
           button.close(type='button', data-dismiss='modal', aria-label='Close')
             span(aria-hidden='true') ×
         .modal-body
-          h3(lecture-title) 웹 프로그래밍
+          h3.lecture-title
           ul.lecture-info
             li.lecture-time
               i.material-icons.ic-lecture-info access_alarm
-              span 강의 시간 : 09:00 - 10:50 | (월), (수)
+              span#lecture-time 
             li.lecture-code
               i.material-icons.ic-lecture-info code
-              span 교과목 코드 : A0000001
+              span#lecture-code 
             li.lecture-code
               i.material-icons.ic-lecture-info school
-              span 담당 교수 : 김진수
+              span#lecture-professor
             li.lecture-code
               i.material-icons.ic-lecture-info business
-              span 강의실 : 공학관 204
+              span#lecture-location
           .lecture-description
             p.txt-description
               | 본 강의에서는 JSP를 이용한 웹 기반 프로그래밍 기초 및 응용기술에 대해 학습합니다. 특히 실습 위주의 수업으로 프로그래밍 스킬 향상 및
@@ -253,7 +271,7 @@ block content
               | 메모 등록
           .right
             button.btn.btn-light(type='button', data-dismiss='modal') 확인
-            button.btn.btn-danger(type='button') 과목 삭제하기
+            button.btn.btn-danger.delete-lecture(type='button') 과목 삭제하기
   #PopoverContent(style='display: none;')
     h5.schedule-title 메모 등록하기
     .form-group

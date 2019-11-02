@@ -10,7 +10,6 @@ $('.list-lecture').click(function(e){
       .then(res =>{
         const course = res.course;
         $('.modal-body > .lecture-title').text(course.lecture);
-        
         $('#time').text(`강의 시간 : ${course.start_time}:00 - ${course.end_time}:00 | (${course.dayofweek})`);
         
         $('#code').attr('data-code', course.code);
@@ -24,7 +23,23 @@ $('.list-lecture').click(function(e){
 });
   
 $('.lecture-time > a').click(function () {
-  $('#modal-lecture-task').modal('show');
+  const table_id = $(this).attr('data-lecture')
+  const url = `/timetable/${table_id}`
+  fetch(url)
+  .then(res => res.json())
+  .then(res => {
+    const course = res.course;
+    $('.modal-body > .lecture-title').text(course.course_name);
+    $('#lecture-time').text(`강의 시간 : ${course.course_start}:00 - ${course.course_end}:00 | (${course.course_day})`);
+      
+    $('#lecture-code').attr('data-lecture', course.id);
+    $('#lecture-code').text(`교과목 코드 : ${course.course_code}`);
+      
+    $('#lecture-professor').text(`담당 교수 : ${course.course_professor}`);
+    $('#lecture-location').text(`강의실 : ${course.course_location}`);
+    
+    $('#modal-lecture-task').modal('show');
+  })
 });
 
 $(function () {
@@ -69,7 +84,7 @@ $('.form-control').on("propertychange change keyup paste input", function(){
   })
 });
 
-$('.submit').click(function(){
+$('.submit-course').click(function(){
   const course_code = $('#code').attr('data-code');
   const url = `/timetable`;
   fetch(url, {
@@ -81,7 +96,24 @@ $('.submit').click(function(){
   })
   .then(res=> res.json())
   .then(res => {
-    console.log(res);
     alert(res.message);
+    location.reload();
   })
 });
+
+$('.delete-lecture').click(function(){
+    const id = parseInt($('#lecture-code').attr('data-lecture'));
+    const url = `/timetable`;
+    fetch(url, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify( { id: id } )
+    })
+    .then(res => res.json())
+    .then(res => {
+      alert(res.message)
+      .then(location.reload())
+    })
+})
