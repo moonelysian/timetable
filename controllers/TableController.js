@@ -32,7 +32,7 @@ const createTable = function(req, res){
                     models.Timetable.create(insertData) 
                     .then(result => res.send({ message: '등록되었습니다' }))
                 } else {
-                    res.send({ message: '이미 등록된 과목입니다' });
+                    res.send({ message: '등록이 불가합니다' });
                 }
             }
             checkTable(insertData, callback);
@@ -49,6 +49,11 @@ const deleteTable =function(req, res){
 }
 
 const checkTable = function(insertData, callback){
+    const days = insertData.course_day.split('')
+    if (days.length == 1){
+        days[1] = days[0];
+    }
+    console.log(days)
     models.Timetable.findOne({where: {course_code: insertData.course_code}})
     .then(result => {
         if(result) return false;
@@ -56,8 +61,13 @@ const checkTable = function(insertData, callback){
             models.Timetable.findOne({ 
                 where: {
                     [Op.and]:[
-                        { course_start: insertData.course_start },
-                        { course_day: {[Op.like]: "%" + insertData.course_day + "%"} }
+                        { 
+                            [Op.or]:[
+                                { course_start: { [Op.and]: [ {[Op.gte]: insertData.course_start }, { [Op.lt]: insertData.course_end}] } },
+                                { course_end: { [Op.and]: [ {[Op.gt]: insertData.course_start }, { [Op.lte]: insertData.course_end}] } },
+                            ]
+                        },
+                        { course_day: {[Op.or]:[ {[Op.like]: '%'+ days[0] +'%'}, {[Op.like]: '%'+ days[1]+'%'} ]}}
                     ]
                 }
             })

@@ -56,6 +56,29 @@ $(function () {
     return $("#PopoverContent").html();
     }
   });
+  $('.submit-memo').click(function(){
+    console.log("test")
+    const title = $('#recipient-name').val();
+    const content = $('#message-text').val();
+    const tableId = $('#lecture-code').attr('data-lecture')
+    const url = '/memos'
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        title: title,
+        content: content,
+        tableId: tableId
+        })
+    })
+    .then(res=>res.json())
+    .then(res => {
+      console.log(res)
+    })
+  })
+  
 });
 
 $('.form-control').on("propertychange change keyup paste input", function(){

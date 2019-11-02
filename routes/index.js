@@ -13,7 +13,12 @@ router.use('/memos', memo)
 router.get('/', function(req, res, next) {
   models.Courses.findAll()
   .then(courses => {
-    models.Timetable.findAll({order: [['course_start']]})
+    models.Timetable.findAll({
+      // include: {
+      //   model: models.Memo
+      // },
+      order: [['course_start']]
+    })
     .then(timetable => {
       res.render('index', 
       { 
