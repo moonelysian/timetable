@@ -103,17 +103,34 @@ $('.submit-course').click(function(){
 
 $('.delete-lecture').click(function(){
     const id = parseInt($('#lecture-code').attr('data-lecture'));
-    const url = `/timetable`;
-    fetch(url, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify( { id: id } )
-    })
+    const url = `/timetable/${id}`;
+    fetch(url, { method: 'DELETE' })
     .then(res => res.json())
     .then(res => {
-      alert(res.message)
-      .then(location.reload())
+      alert(res.message);
+      location.reload()
     })
+})
+
+$('.submit-memo').click(function(){
+  console.log("test")
+  const title = $('#recipient-name').val();
+  const content = $('#message-text').val();
+  const tableId = $('#lecture-code').attr('data-lecture')
+  const url = '/memos'
+  fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      title: title,
+      content: content,
+      tableId: tableId
+      })
+  })
+  .then(res=>res.json())
+  .then(res => {
+    console.log(res)
+  })
 })

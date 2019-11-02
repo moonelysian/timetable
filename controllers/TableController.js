@@ -43,7 +43,7 @@ const createTable = function(req, res){
 }
 
 const deleteTable =function(req, res){
-    const id = req.body.id;
+    const id = req.params.tableId;
     models.Timetable.destroy({ where: { id: id }})
     .then( result => res.send({message: '삭제되었습니다'}))
 }

@@ -80,11 +80,11 @@ block content
                 .top-info.today
                   h4.day Mon
                 ul
-                  each t in timetable
+                  each t, i in timetable
                     if (t.course_day).indexOf('월')!= -1
                       - if(t.course_start == 9) t.course_start = '09'
                       - if((t.course_end - t.course_start)==2)
-                        li(class= "lecture-time two-hr hr-"+t.course_start data-event="lecture-0"+t.id)
+                        li(class= "lecture-time two-hr hr-"+t.course_start data-event="lecture-0"+(t.id%10+1))
                           a(href='#' data-lecture=t.id)
                               .lecture-info
                                 h6.lecture-title #{t.course_name}
@@ -93,7 +93,7 @@ block content
                                 i.material-icons.ic-lecture-noti assignment
                                 span.lecture-noti-title
                       - else
-                        li(class= "lecture-time hr-"+t.course_start data-event="lecture-0"+t.id)
+                        li(class= "lecture-time hr-"+t.course_start data-event="lecture-0"+(t.id%10+1))
                           a(href='#' data-lecture=t.id)
                             .lecture-info
                               h6.lecture-title #{t.course_name}
@@ -105,11 +105,11 @@ block content
                 .top-info.tue
                   h4.day Tue
                 ul
-                  each index, t in timetable
+                  each t in timetable
                     if (t.course_day).indexOf('화')!= -1
                       - if(t.course_start == 9) t.course_start = '09'
                       - if((t.course_end - t.course_start)==2)
-                        li(class= "lecture-time two-hr hr-"+t.course_start data-event="lecture-0"+t.id)
+                        li(class= "lecture-time two-hr hr-"+t.course_start data-event="lecture-0"+(t.id%10+1))
                           a(href='#' data-lecture= t.id)
                               .lecture-info
                                 h6.lecture-title #{t.course_name}
@@ -118,8 +118,8 @@ block content
                                 i.material-icons.ic-lecture-noti assignment
                                 span.lecture-noti-title 과제 제목 텍스트
                       - else
-                        li(class= "lecture-time hr-"+t.course_start data-event="lecture-0"+index)
-                          a(href='#')
+                        li(class= "lecture-time hr-"+t.course_start data-event="lecture-0"+(t.id%10+1))
+                          a(href='#' data-lecture=t.id)
                             .lecture-info
                               h6.lecture-title #{t.course_name}
                               h6.lecture-location #{t.course_location} 
@@ -134,8 +134,8 @@ block content
                     if (t.course_day).indexOf('수')!= -1
                       - if(t.course_start == 9) t.course_start = '09'
                       - if((t.course_end - t.course_start)==2)
-                        li(class= "lecture-time two-hr hr-"+t.course_start data-event="lecture-0"+t.id)
-                          a(href='#')
+                        li(class= "lecture-time two-hr hr-"+t.course_start data-event="lecture-0"+(t.id%10+1))
+                          a(href='#' data-lecture=t.id)
                               .lecture-info
                                 h6.lecture-title #{t.course_name}
                                 h6.lecture-location #{t.course_location} 
@@ -143,8 +143,8 @@ block content
                                 i.material-icons.ic-lecture-noti assignment
                                 span.lecture-noti-title 과제 제목 텍스트
                       - else
-                        li(class= "lecture-time hr-"+t.course_start data-event="lecture-0"+t.id)
-                          a(href='#')
+                        li(class= "lecture-time hr-"+t.course_start data-event="lecture-0"+(t.id%10+1))
+                          a(href='#' data-lecture=t.id)
                             .lecture-info
                               h6.lecture-title #{t.course_name}
                               h6.lecture-location #{t.course_location} 
@@ -159,8 +159,8 @@ block content
                     if (t.course_day).indexOf('목')!= -1
                       - if(t.course_start == 9) t.course_start = '09'
                       - if((t.course_end - t.course_start)==2)
-                        li(class= "lecture-time two-hr hr-"+t.course_start data-event="lecture-0"+t.id)
-                          a(href='#')
+                        li(class= "lecture-time two-hr hr-"+t.course_start data-event="lecture-0"+(t.id%10+1))
+                          a(href='#' data-lecture=t.id)
                               .lecture-info
                                 h6.lecture-title #{t.course_name}
                                 h6.lecture-location #{t.course_location} 
@@ -168,7 +168,7 @@ block content
                                 i.material-icons.ic-lecture-noti assignment
                                 span.lecture-noti-title 과제 제목 텍스트
                       - else
-                        li(class= "lecture-time hr-"+t.course_start data-event="lecture-0"+t.id)
+                        li(class= "lecture-time hr-"+t.course_start data-event="lecture-0"+(t.id%10+1))
                           a(href='#')
                             .lecture-info
                               h6.lecture-title #{t.course_name}
@@ -184,8 +184,8 @@ block content
                     if (t.course_day).indexOf('금')!= -1
                       - if(t.course_start == 9) t.course_start = '09'
                       - if((t.course_end - t.course_start)==2)
-                        li(class= "lecture-time two-hr hr-"+t.course_start data-event="lecture-0"+t.id)
-                          a(href='#' data-code='#{t.course_code}')
+                        li(class= "lecture-time two-hr hr-"+t.course_start data-event="lecture-0"+(t.id%10+1))
+                          a(href='#' data-lecture=t.id)
                               .lecture-info
                                 h6.lecture-title #{t.course_name}
                                 h6.lecture-location #{t.course_location} 
@@ -193,8 +193,8 @@ block content
                                 i.material-icons.ic-lecture-noti assignment
                                 span.lecture-noti-title 과제 제목 텍스트
                       - else
-                        li(class= "lecture-time hr-"+t.course_start data-event="lecture-0"+t.id)
-                          a(href='#')
+                        li(class= "lecture-time hr-"+t.course_start data-event="lecture-0"+(t.id%10+1))
+                          a(href='#' data-lecture=t.id)
                             .lecture-info
                               h6.lecture-title #{t.course_name}
                               h6.lecture-location #{t.course_location} 
@@ -281,4 +281,4 @@ block content
     .form-group
       label.col-form-label(for='message-text') 설명
       textarea#message-text.form-control(placeholder='설명 추가')
-    button.btn.btn-primary.btn-save(type='button') 등록
+    button.btn.btn-primary.btn-save.submit-memo(type='button') 등록

@@ -2,13 +2,12 @@ const { Router } = require('express');
 const models = require('../models');         
 const courses = require('./courses');
 const timetables = require('./timetables');
-const sequelize = require('sequelize')
-//const memo = require('./memo');
+const memo = require('./memo');
 
 const router = Router();
 router.use('/courses', courses)
 router.use('/timetable', timetables)
-//router.use('/memo', memo)
+router.use('/memos', memo)
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
