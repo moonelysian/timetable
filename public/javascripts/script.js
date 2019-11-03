@@ -53,7 +53,31 @@ $(function () {
     placement: 'right',
     sanitize: false,
     content: $("#PopoverContent").html()
-  });
+  })
+  .on('click', function(){
+    $('.submit-memo').click(function(){
+      const title = $('.popover #recipient-name').val();
+      const content = $('.popover #message-text').val();
+      const tableId = $('#lecture-code').attr('data-lecture');
+      const url = '/memos';
+      fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          title: title,
+          content: content,
+          tableId: tableId
+          })
+      })
+      .then(res=>res.json())
+      .then(res => {
+        alert(res.message);
+        location.reload();
+      })
+    })
+  })
 });
 
 $('.form-control').on("propertychange change keyup paste input", function(){
@@ -110,12 +134,12 @@ $('.delete-lecture').click(function(){
     })
 })
 
-$(document).on('click', '.submit-memo', function(){
-  const title = $('#PopoverContent').find('#recipient-name').value;
-  const content = document.getElementById('message-text').value;
-  const tableId = $('#lecture-code').attr('data-lecture')
-  const url = '/memos'
-  console.log($('#PopoverContent').find('#recipient-name'));
+// $(document).on('click', '.submit-memo', function(){
+//   const title = $('#recipient-name').value;
+//   const content = $('#message-text').value;
+//   const tableId = $('#lecture-code').attr('data-lecture')
+//   const url = '/memos'
+//   console.log(title);
   // fetch(url, {
   //   method: 'POST',
   //   headers: {
@@ -131,7 +155,7 @@ $(document).on('click', '.submit-memo', function(){
   // .then(res => {
   //   console.log(res)
   // })
-})
+//})
 
 // $('#delete-memo').click(function(){
 //   const memoId;
