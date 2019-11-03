@@ -10,12 +10,18 @@ const getMemo = function(req, res){
 
 const createMemo = function(req, res){
     const memo = {
-        tableId: req.body.tableId,
+        tableId: parseInt(req.body.tableId),
         title: req.body.title,
         content: req.body.content
     }
-    models.Memos.create(memo)
-    .then(result => res.send({ message: '등록되었습니다' }))
+    console.log(memo)
+    try{
+        models.Memos.create(memo)
+        .then(result => res.send({ message: '등록되었습니다' }))
+    }catch(err){
+        console.log(err)
+    }
+    
 }
 
 const deleteMemo = function(req, res){
