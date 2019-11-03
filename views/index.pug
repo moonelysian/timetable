@@ -80,92 +80,107 @@ block content
                 .top-info.today
                   h4.day Mon
                 ul
-                  each course in timetable.mon
-                    if (course.hr == 2)
-                      li(class= "lecture-time two-hr hr-"+course.course_start data-event="lecture-"+(course.id))
-                        a(href='#' data-lecture=course.id)
-                          .lecture-info
-                            h6.lecture-title #{course.course_name}
-                            h6.lecture-location #{course.course_location}
-                          if course.memo
-                            each memo in course.memo
-                              .lecture-noti(data-toggle='tooltip', data-placement='top', title='', data-original-title= memo.title )
-                                i.material-icons.ic-lecture-noti assignment
-                                span.lecture-noti-title #{memo.content}
-                    else
-                      li(class= "lecture-time hr-"+course.course_start data-event="lecture-"+course.id)
-                        a(href='#' data-lecture=course.id)
-                          .lecture-info
-                            h6.lecture-title #{course.course_name}
-                            h6.lecture-location #{course.course_location}
-                          if course.memo
-                            each memo in course.memo
-                              .lecture-noti(data-toggle='tooltip', data-placement='top', title='', data-original-title= memo.title )
-                                i.material-icons.ic-lecture-noti assignment
-                                span.lecture-noti-title #{memo.content}
+                  if Object.keys(timetable).length > 0
+                    each course in timetable.mon
+                      if (course.hr == 2)
+                        li(class= "lecture-time two-hr hr-"+course.course_start data-event="lecture-"+(course.id))
+                          a(href='#' data-lecture=course.id)
+                            .lecture-info
+                              h6.lecture-title #{course.course_name}
+                              h6.lecture-location #{course.course_location}
+                            if course.memo
+                              each memo in course.memo
+                                .lecture-noti(data-toggle='tooltip', data-placement='top', title='', data-original-title= memo.title )
+                                  i.material-icons.ic-lecture-noti assignment
+                                  span.lecture-noti-title #{memo.content}
+                      else
+                        li(class= "lecture-time hr-"+course.course_start data-event="lecture-"+course.id)
+                          a(href='#' data-lecture=course.id)
+                            .lecture-info
+                              h6.lecture-title #{course.course_name}
+                              h6.lecture-location #{course.course_location}
+                            if course.memo
+                              each memo in course.memo
+                                .lecture-noti(data-toggle='tooltip', data-placement='top', title='', data-original-title= memo.title )
+                                  i.material-icons.ic-lecture-noti assignment
+                                  span.lecture-noti-title #{memo.content}
               li.timeline-vertical
                 .top-info.tue
                   h4.day Tue
                 ul
-                  each course in timetable.tue
-                    if (course.hr == 2)
-                      li(class= "lecture-time two-hr hr-"+course.course_start data-event="lecture-"+course.id)
-                        a(href='#' data-lecture=course.id)
-                          .lecture-info
-                            h6.lecture-title #{course.course_name}
-                            h6.lecture-location #{course.course_location}
-                          if course.memo
-                            each memo in course.memo
-                              .lecture-noti(data-toggle='tooltip', data-placement='top', title='', data-original-title= memo.title )
-                                i.material-icons.ic-lecture-noti assignment
-                                span.lecture-noti-title #{memo.content}
-                    else
-                      li(class= "lecture-time hr-"+course.course_start data-event="lecture-"+course.id)
-                        a(href='#' data-lecture=course.id)
-                          .lecture-info
-                            h6.lecture-title #{course.course_name}
-                            h6.lecture-location #{course.course_location}
-                          if course.memo
-                            each memo in course.memo
-                              .lecture-noti(data-toggle='tooltip', data-placement='top', title='', data-original-title= memo.title )
-                                i.material-icons.ic-lecture-noti assignment
-                                span.lecture-noti-title #{memo.content}
+                  if Object.keys(timetable).length > 0
+                    each course in timetable.tue
+                      if (course.hr == 2)
+                        li(class= "lecture-time two-hr hr-"+course.course_start data-event="lecture-"+course.id)
+                          a(href='#' data-lecture=course.id)
+                            .lecture-info
+                              h6.lecture-title #{course.course_name}
+                              h6.lecture-location #{course.course_location}
+                            if course.memo
+                              each memo in course.memo
+                                .lecture-noti(data-toggle='tooltip', data-placement='top', title='', data-original-title= memo.title )
+                                  i.material-icons.ic-lecture-noti assignment
+                                  span.lecture-noti-title #{memo.content}
+                      else
+                        li(class= "lecture-time hr-"+course.course_start data-event="lecture-"+course.id)
+                          a(href='#' data-lecture=course.id)
+                            .lecture-info
+                              h6.lecture-title #{course.course_name}
+                              h6.lecture-location #{course.course_location}
+                            if course.memo
+                              each memo in course.memo
+                                .lecture-noti(data-toggle='tooltip', data-placement='top', title='', data-original-title= memo.title )
+                                  i.material-icons.ic-lecture-noti assignment
+                                  span.lecture-noti-title #{memo.content}
 
               li.timeline-vertical
                 .top-info
                   h4.day Wed
                 ul
-                  each course in timetable.wed
-                    if (course.hr == 2)
-                      li(class= "lecture-time two-hr hr-"+course.course_start data-event="lecture-"+course.id)
-                        a(href='#' data-lecture=course.id)
-                          .lecture-info
-                            h6.lecture-title #{course.course_name}
-                            h6.lecture-location #{course.course_location}
-                          if course.memo
-                            each memo in course.memo
-                              .lecture-noti(data-toggle='tooltip', data-placement='top', title='', data-original-title= memo.title )
-                                i.material-icons.ic-lecture-noti assignment
-                                span.lecture-noti-title #{memo.content}
-                  else
-                    li(class= "lecture-time hr-"+course.course_start data-event="lecture-"+course.id)
-                      a(href='#' data-lecture=course.id)
-                        .lecture-info
-                          h6.lecture-title #{course.course_name}
-                          h6.lecture-location #{course.course_location}
-                        if course.memo
-                          each memo in course.memo
-                            .lecture-noti(data-toggle='tooltip', data-placement='top', title='', data-original-title= memo.title )
-                              i.material-icons.ic-lecture-noti assignment
-                              span.lecture-noti-title #{memo.content}
-                  
+                  if Object.keys(timetable).length > 0
+                    each course in timetable.wed
+                      if (course.hr == 2)
+                        li(class= "lecture-time two-hr hr-"+course.course_start data-event="lecture-"+course.id)
+                          a(href='#' data-lecture=course.id)
+                            .lecture-info
+                              h6.lecture-title #{course.course_name}
+                              h6.lecture-location #{course.course_location}
+                            if course.memo
+                              each memo in course.memo
+                                .lecture-noti(data-toggle='tooltip', data-placement='top', title='', data-original-title= memo.title )
+                                  i.material-icons.ic-lecture-noti assignment
+                                  span.lecture-noti-title #{memo.content}
+                      else
+                        li(class= "lecture-time hr-"+course.course_start data-event="lecture-"+course.id)
+                          a(href='#' data-lecture=course.id)
+                            .lecture-info
+                              h6.lecture-title #{course.course_name}
+                              h6.lecture-location #{course.course_location}
+                            if course.memo
+                              each memo in course.memo
+                                .lecture-noti(data-toggle='tooltip', data-placement='top', title='', data-original-title= memo.title )
+                                  i.material-icons.ic-lecture-noti assignment
+                                  span.lecture-noti-title #{memo.content}
+                    
               li.timeline-vertical
                 .top-info.thu
                   h4.day Thu
                 ul
-                  each course in timetable.thu
-                    if (course.hr == 2)
-                        li(class= "lecture-time two-hr hr-"+course.course_start data-event="lecture-"+course.id)
+                  if Object.keys(timetable).length > 0
+                    each course in timetable.thu
+                      if (course.hr == 2)
+                          li(class= "lecture-time two-hr hr-"+course.course_start data-event="lecture-"+course.id)
+                            a(href='#' data-lecture=course.id)
+                              .lecture-info
+                                h6.lecture-title #{course.course_name}
+                                h6.lecture-location #{course.course_location}
+                              if course.memo
+                                each memo in course.memo
+                                  .lecture-noti(data-toggle='tooltip', data-placement='top', title='', data-original-title= memo.title )
+                                    i.material-icons.ic-lecture-noti assignment
+                                    span.lecture-noti-title #{memo.content}
+                      else
+                        li(class= "lecture-time hr-"+course.course_start data-event="lecture-"+course.id)
                           a(href='#' data-lecture=course.id)
                             .lecture-info
                               h6.lecture-title #{course.course_name}
@@ -175,24 +190,25 @@ block content
                                 .lecture-noti(data-toggle='tooltip', data-placement='top', title='', data-original-title= memo.title )
                                   i.material-icons.ic-lecture-noti assignment
                                   span.lecture-noti-title #{memo.content}
-                    else
-                      li(class= "lecture-time hr-"+course.course_start data-event="lecture-"+course.id)
-                        a(href='#' data-lecture=course.id)
-                          .lecture-info
-                            h6.lecture-title #{course.course_name}
-                            h6.lecture-location #{course.course_location}
-                          if course.memo
-                            each memo in course.memo
-                              .lecture-noti(data-toggle='tooltip', data-placement='top', title='', data-original-title= memo.title )
-                                i.material-icons.ic-lecture-noti assignment
-                                span.lecture-noti-title #{memo.content}
               li.timeline-vertical
                 .top-info.fri
                   h4.day Fri
                 ul
-                  each course in timetable.fri
-                    if (course.hr == 2)
-                        li(class= "lecture-time two-hr hr-"+course.course_start data-event="lecture-"+course.id)
+                  if Object.keys(timetable).length > 0
+                    each course in timetable.fri
+                      if (course.hr == 2)
+                          li(class= "lecture-time two-hr hr-"+course.course_start data-event="lecture-"+course.id)
+                            a(href='#' data-lecture=course.id)
+                              .lecture-info
+                                h6.lecture-title #{course.course_name}
+                                h6.lecture-location #{course.course_location}
+                              if course.memo
+                                each memo in course.memo
+                                  .lecture-noti(data-toggle='tooltip', data-placement='top', title='', data-original-title= memo.title )
+                                    i.material-icons.ic-lecture-noti assignment
+                                    span.lecture-noti-title #{memo.content}
+                      else
+                        li(class= "lecture-time hr-"+course.course_start data-event="lecture-"+course.id)
                           a(href='#' data-lecture=course.id)
                             .lecture-info
                               h6.lecture-title #{course.course_name}
@@ -202,17 +218,6 @@ block content
                                 .lecture-noti(data-toggle='tooltip', data-placement='top', title='', data-original-title= memo.title )
                                   i.material-icons.ic-lecture-noti assignment
                                   span.lecture-noti-title #{memo.content}
-                    else
-                      li(class= "lecture-time hr-"+course.course_start data-event="lecture-"+course.id)
-                        a(href='#' data-lecture=course.id)
-                          .lecture-info
-                            h6.lecture-title #{course.course_name}
-                            h6.lecture-location #{course.course_location}
-                          if course.memo
-                            each memo in course.memo
-                              .lecture-noti(data-toggle='tooltip', data-placement='top', title='', data-original-title= memo.title )
-                                i.material-icons.ic-lecture-noti assignment
-                                span.lecture-noti-title #{memo.content}
 
   #modal-lecture-info.modal.fade(role='dialog', aria-hidden='true')
     .modal-dialog(role='document')

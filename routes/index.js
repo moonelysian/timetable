@@ -26,6 +26,7 @@ router.get('/', async function(req, res, next) {
     
     
     if(tables.length !== 0){
+      console.log('TTTTTTTT')
         tables.forEach(function(t){
           array.push(t.dataValues)
         })
@@ -37,7 +38,7 @@ router.get('/', async function(req, res, next) {
             }
           })
         })
-        
+
       for( let i=0; i < array.length; i++){
           if(array[i].id < 10) array[i].id = '0'+array[i].id
           if(array[i].course_end - array[i].course_start == 2){
@@ -59,8 +60,9 @@ router.get('/', async function(req, res, next) {
           if(array[i].course_day.indexOf('금')!=-1){
             my_timetable.fri.push(array[i])
           }
-      }
-  
+        }
+    
+    console.log(my_timetable)
     res.render('index', {
       title: 'programmers 과제 테스트 템플릿 - Node.js', 
       courses: courses,
@@ -72,7 +74,8 @@ else{
     res.render('index', 
       {  
         title: 'programmers 과제 테스트 템플릿 - Node.js', 
-        courses: courses
+        courses: courses,
+        timetable: {}
     });
   }
 })
