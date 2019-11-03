@@ -1,13 +1,13 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const memos = sequelize.define('Memos', {
-    tableId: DataTypes.STRING,
+    tableId: DataTypes.INTEGER,
     title: DataTypes.STRING,
     content: DataTypes.STRING
   }, {
       timestamps: false,
-      charset: 'utf8',
-      collate: 'utf8_unicode_ci'
+      charset: 'utf8mb4',
+      collation: 'utf_general_ci'
   });
   memos.associate = function(models) {
     memos.belongsTo(models.Timetables,{

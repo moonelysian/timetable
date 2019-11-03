@@ -11,11 +11,13 @@ module.exports = (sequelize, DataTypes) => {
 
   }, {
       timestamps: false,
-      charset: 'utf8',
-      collate: 'utf8_unicode_ci'
+      charset: 'utf8mb4',
+      collation: 'utf_general_ci'
   });
   timetables.associate = function(models) {
-    timetables.hasMany(models.Memos);
+    timetables.hasMany(models.Memos,{
+      foreignKey: 'tableId'
+    });
   };
   return timetables;
 };

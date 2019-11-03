@@ -12,7 +12,9 @@ module.exports = (sequelize, DataTypes) => {
     end_time: DataTypes.INTEGER,
     dayofweek: DataTypes.STRING
   }, {
-    timestamps: false
+    timestamps: false,
+    charset: 'utf8mb4',
+    collation: 'utf_general_ci'
   });
   courses.associate = function(models) {
     // associations can be defined here

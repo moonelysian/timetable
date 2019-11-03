@@ -5,6 +5,12 @@
     "database": "my_database",
     "host": "127.0.0.1",
     "dialect": "mysql",
+    "define": {
+      "charset": "utf8mb4",
+      "dialectOptions": {
+        "collate": "utf8mb4_general_ci"
+      }
+    },
     "operatorsAliases": false
   },
   "test": {
