@@ -37,14 +37,31 @@ $('.lecture-time > a').click(function () {
       
     $('#lecture-professor').text(`담당 교수 : ${course.course_professor}`);
     $('#lecture-location').text(`강의실 : ${course.course_location}`);
-    
+
+    $('#memo *').remove();
+    const memos = res.memos;
+    memos.forEach(function(memo){
+    $('#memo').append(`
+    <li class='memo-list' data-memo=${memo.id}>
+      <div class='memo-content' data-toggle='tooltip' data-placement='top' title='' data-original-title='${memo.content}'>
+        <i class='material-icons ic-lecture-noti'> assignment </i>
+        <span class='lecture-noti-title'> ${memo.title} </span>
+      </div>
+      <div class='memo-btn'>
+        <a id='delete-memo' href=''>
+          <i class='material-icons ic-lecture-noti'> delete </i>
+        </a>
+      </div>
+    </li>`);
+    })
+
     $('#modal-lecture-task').modal('show');
   })
 });
 
-$(function () {
-  $('[data-toggle="tooltip"]').tooltip();
-});
+$('body').tooltip({
+  selector: '[data-toggle="tooltip"]'
+})
 
 $(function () {
   $('[data-toggle="popover"]').popover({
@@ -134,13 +151,14 @@ $('.delete-lecture').click(function(){
     })
 })
 
-// $('#delete-memo').click(function(){
-//   const memoId;
-//   const url = `/memos/${memoId}`;
-//   fetch(url, {method: 'DELETE'})
-//   .then(res=> res.json())
-//   .then(res => {
-//     alert(res.message);
-//     location.reload();
-//   })
-// })
+$(document).on('click' , '#delete-memo', function(){
+  const memoId = $('.memo-list').attr('data-memo');
+  console.log(memoId);
+  const url = `/memos/${memoId}`;
+  fetch(url, {method: 'DELETE'})
+  .then(res=> res.json())
+  .then(res => {
+    alert(res.message);
+    location.reload();
+  })
+})

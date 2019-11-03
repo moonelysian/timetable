@@ -106,7 +106,18 @@ block content
                   h4.day Tue
                 ul
                   each course in timetable.tue
-                      li(class= "lecture-time two-hr hr-2" data-event="lecture-"+course.id)
+                    if (course.hr == 2)
+                      li(class= "lecture-time two-hr hr-"+course.course_start data-event="lecture-"+course.id)
+                        a(href='#' data-lecture=course.id)
+                          .lecture-info
+                            h6.lecture-title #{course.course_name}
+                            h6.lecture-location #{course.course_location}
+                          if course.memo_id
+                            .lecture-noti(data-toggle='tooltip', data-placement='top', title='', data-original-title= course.memo_content )
+                              i.material-icons.ic-lecture-noti assignment
+                              span.lecture-noti-title #{course.memo_title}
+                    else
+                      li(class= "lecture-time hr-"+course.course_start data-event="lecture-"+course.id)
                         a(href='#' data-lecture=course.id)
                           .lecture-info
                             h6.lecture-title #{course.course_name}
@@ -119,9 +130,20 @@ block content
               li.timeline-vertical.wed
                 .top-info
                   h4.day Wed
-                ul.wed
+                ul
                   each course in timetable.wed
-                      li(class= "lecture-time two-hr hr-2" data-event="lecture-"+course.id)
+                    if (course.hr == 2)
+                      li(class= "lecture-time two-hr hr-"+course.course_start data-event="lecture-"+course.id)
+                        a(href='#' data-lecture=course.id)
+                          .lecture-info
+                            h6.lecture-title #{course.course_name}
+                            h6.lecture-location #{course.course_location}
+                          if course.memo_id
+                            .lecture-noti(data-toggle='tooltip', data-placement='top', title='', data-original-title= course.memo_content )
+                              i.material-icons.ic-lecture-noti assignment
+                              span.lecture-noti-title #{course.memo_title}
+                    else
+                      li(class= "lecture-time hr-"+course.course_start data-event="lecture-"+course.id)
                         a(href='#' data-lecture=course.id)
                           .lecture-info
                             h6.lecture-title #{course.course_name}
@@ -135,34 +157,52 @@ block content
                 .top-info.thu
                   h4.day Thu
                 ul
-                  each course in timetable.wed
-                    if course.end - course.start == 2
+                  each course in timetable.thu
+                    if (course.hr == 2)
                       li(class= "lecture-time two-hr hr-"+course.course_start data-event="lecture-"+course.id)
+                        a(href='#' data-lecture=course.id)
+                          .lecture-info
+                            h6.lecture-title #{course.course_name}
+                            h6.lecture-location #{course.course_location}
+                          if course.memo_id
+                            .lecture-noti(data-toggle='tooltip', data-placement='top', title='', data-original-title= course.memo_content )
+                              i.material-icons.ic-lecture-noti assignment
+                              span.lecture-noti-title #{course.memo_title}
                     else
                       li(class= "lecture-time hr-"+course.course_start data-event="lecture-"+course.id)
-
-                      a(href='#' data-lecture=course.id)
-                        .lecture-info
-                          h6.lecture-title #{course.course_name}
-                          h6.lecture-location #{course.course_location}
-                        if course.memo_id
-                          .lecture-noti(data-toggle='tooltip', data-placement='top', title='', data-original-title= course.memo_content )
-                            i.material-icons.ic-lecture-noti assignment
-                            span.lecture-noti-title #{course.memo_title}
+                        a(href='#' data-lecture=course.id)
+                          .lecture-info
+                            h6.lecture-title #{course.course_name}
+                            h6.lecture-location #{course.course_location}
+                          if course.memo_id
+                            .lecture-noti(data-toggle='tooltip', data-placement='top', title='', data-original-title= course.memo_content )
+                              i.material-icons.ic-lecture-noti assignment
+                              span.lecture-noti-title #{course.memo_title}
               li.timeline-vertical
                 .top-info.fri
                   h4.day Fri
                 ul
-                  each course in timetable.wed
-                        li(class= "lecture-time two-hr hr-2" data-event="lecture-"+course.id)
-                          a(href='#' data-lecture=course.id)
-                            .lecture-info
-                              h6.lecture-title #{course.course_name}
-                              h6.lecture-location #{course.course_location}
-                            if course.memo_id
-                              .lecture-noti(data-toggle='tooltip', data-placement='top', title='', data-original-title= course.memo_content )
-                                i.material-icons.ic-lecture-noti assignment
-                                span.lecture-noti-title #{course.memo_title}
+                  each course in timetable.fri
+                    if (course.hr == 2)
+                      li(class= "lecture-time two-hr hr-"+course.course_start data-event="lecture-"+course.id)
+                        a(href='#' data-lecture=course.id)
+                          .lecture-info
+                            h6.lecture-title #{course.course_name}
+                            h6.lecture-location #{course.course_location}
+                          if course.memo_id
+                            .lecture-noti(data-toggle='tooltip', data-placement='top', title='', data-original-title= course.memo_content )
+                              i.material-icons.ic-lecture-noti assignment
+                              span.lecture-noti-title #{course.memo_title}
+                    else
+                      li(class= "lecture-time hr-"+course.course_start data-event="lecture-"+course.id)
+                        a(href='#' data-lecture=course.id)
+                          .lecture-info
+                            h6.lecture-title #{course.course_name}
+                            h6.lecture-location #{course.course_location}
+                          if course.memo_id
+                            .lecture-noti(data-toggle='tooltip', data-placement='top', title='', data-original-title= course.memo_content )
+                              i.material-icons.ic-lecture-noti assignment
+                              span.lecture-noti-title #{course.memo_title}
 
   #modal-lecture-info.modal.fade(role='dialog', aria-hidden='true')
     .modal-dialog(role='document')
@@ -219,14 +259,21 @@ block content
               | 실무 능력을 갖출 수 있도록 합니다.
           .lecture-memo
             h5.memo-header 메모
-            ul
-              li.memo-list
-                .memo-content(data-toggle='tooltip', data-placement='top', title='', data-original-title='과제 설명 텍스트 과제 설명 텍스트 과제 설명 텍스트')
-                  i.material-icons.ic-lecture-noti assignment
-                  span.lecture-noti-title 과제 제목 텍스트
-                .memo-btn
-                  a(id='delete-memo' href='')
-                    i.material-icons.ic-lecture-noti delete
+            ul#memo
+              //- li.memo-list
+              //-   .memo-content(data-toggle='tooltip', data-placement='top', title='', data-original-title='과제 설명 텍스트 과제 설명 텍스트 과제 설명 텍스트')
+              //-     i.material-icons.ic-lecture-noti assignment
+              //-     span.lecture-noti-title 과제 제목 텍스트
+              //-   .memo-btn
+              //-     a(id='delete-memo' href='')
+              //-       i.material-icons.ic-lecture-noti delete
+              //- li.memo-list 
+              //-   .memo-content(data-toggle='tooltip', data-placement='top', title='', data-original-title='과제 설명 텍스트 과제 설명 텍스트 과제 설명 텍스트')
+              //-     i.material-icons.ic-lecture-noti assignment
+              //-     span.lecture-noti-title 과제 제목 텍스트
+              //-   .memo-btn
+              //-     a(id='delete-memo' href='')
+              //-       i.material-icons.ic-lecture-noti delete
         .modal-footer
           .left
             button.btn.btn-light-primary(type='button', data-toggle='popover', data-trigger='click', data-placement='right', data-html='true')

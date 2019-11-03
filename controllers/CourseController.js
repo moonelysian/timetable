@@ -23,7 +23,6 @@ const getSearchData = function(req, res){
             }
         })
         .then(searchData => {
-            console.log(searchData);
             res.send({ searchData: searchData });
         })
     }

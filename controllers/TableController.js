@@ -5,8 +5,11 @@ const Op = sequelize.Op;
 const getTable = function(req, res){
     const tableId = parseInt(req.params.tableId);
     models.Timetables.findOne({where: {id: tableId}})
-    .then( result => {
-        res.send({ course: result })
+    .then( table => {
+        models.Memos.findAll({where: {tableId: tableId}})
+        .then(memos => {
+            res.send({ course: table, memos: memos })
+        })
     })
 }
 
@@ -44,8 +47,13 @@ const createTable = function(req, res){
 
 const deleteTable =function(req, res){
     const id = req.params.tableId;
-    models.Timetable.destroy({ where: { id: id }})
+    try{
+    models.Timetables.destroy({ where: { id: id }})
     .then( result => res.send({message: '삭제되었습니다'}))
+    }
+    catch(err){
+        console.log(err);
+    }
 }
 
 const checkTable = function(insertData, callback){
@@ -53,7 +61,6 @@ const checkTable = function(insertData, callback){
     if (days.length == 1){
         days[1] = days[0];
     }
-    console.log(days)
     models.Timetables.findOne({where: {course_code: insertData.course_code}})
     .then(result => {
         if(result) return false;

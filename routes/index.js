@@ -14,17 +14,16 @@ router.get('/', function(req, res, next) {
   try{
     models.Courses.findAll()
     .then(courses => {
-      // models.sequelize.query(`
-      //     SELECT 
-      //     Timetables.*,
-      //     Memos.id as memo_id,
-      //     Memos.title as memo_title,
-      //     Memos.content as memo_content
-      //     FROM
-      //       Timetables
-      //         LEFT JOIN Memos ON 
-      //     Timetables.id = Memos.tableId`)
-      const timetable = models.Timetables.findAll()
+      models.sequelize.query(`
+          SELECT 
+          Timetables.*,
+          Memos.id as memo_id,
+          Memos.title as memo_title,
+          Memos.content as memo_content
+          FROM
+            Timetables
+              LEFT JOIN Memos ON 
+          Timetables.id = Memos.tableId`)
       .then(result => {
         let test = new Array();
         test.mon = []
@@ -55,7 +54,6 @@ router.get('/', function(req, res, next) {
             test.fri.push(e) 
           }
         })
-
         console.log(test);
         res.render('index', 
         { 
