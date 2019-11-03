@@ -80,127 +80,89 @@ block content
                 .top-info.today
                   h4.day Mon
                 ul
-                  each t, i in timetable
-                    if (t.course_day).indexOf('월')!= -1
-                      - if(t.course_start == 9) t.course_start = '09'
-                      - if((t.course_end - t.course_start)==2)
-                        li(class= "lecture-time two-hr hr-"+t.course_start data-event="lecture-0"+(t.id%10+1))
-                          a(href='#' data-lecture=t.id)
-                              .lecture-info
-                                h6.lecture-title #{t.course_name}
-                                h6.lecture-location #{t.course_location} 
-                              .lecture-noti(data-toggle='tooltip', data-placement='top', title='', data-original-title='과제 설명 텍스트 과제 설명 텍스트 과제 설명 텍스트')
-                                i.material-icons.ic-lecture-noti assignment
-                                span.lecture-noti-title
-                      - else
-                        li(class= "lecture-time hr-"+t.course_start data-event="lecture-0"+(t.id%10+1))
-                          a(href='#' data-lecture=t.id)
-                            .lecture-info
-                              h6.lecture-title #{t.course_name}
-                              h6.lecture-location #{t.course_location} 
-                            .lecture-noti(data-toggle='tooltip', data-placement='top', title='', data-original-title='과제 설명 텍스트 과제 설명 텍스트 과제 설명 텍스트')
+                  each course in timetable.mon
+                    if (course.hr == 2)
+                      li(class= "lecture-time two-hr hr-"+course.course_start data-event="lecture-"+course.id)
+                        a(href='#' data-lecture=course.id)
+                          .lecture-info
+                            h6.lecture-title #{course.course_name}
+                            h6.lecture-location #{course.course_location}
+                          if course.memo_id
+                            .lecture-noti(data-toggle='tooltip', data-placement='top', title='', data-original-title= course.memo_content )
                               i.material-icons.ic-lecture-noti assignment
-                              span.lecture-noti-title 과제 제목 텍스트
-              li.timeline-vertical.tue
+                              span.lecture-noti-title #{course.memo_title}
+                    else
+                      li(class= "lecture-time hr-"+course.course_start data-event="lecture-"+course.id)
+                        a(href='#' data-lecture=course.id)
+                          .lecture-info
+                            h6.lecture-title #{course.course_name}
+                            h6.lecture-location #{course.course_location}
+                          if course.memo_id
+                            .lecture-noti(data-toggle='tooltip', data-placement='top', title='', data-original-title= course.memo_content )
+                              i.material-icons.ic-lecture-noti assignment
+                              span.lecture-noti-title #{course.memo_title}
+              li.timeline-vertical
                 .top-info.tue
                   h4.day Tue
                 ul
-                  each t in timetable
-                    if (t.course_day).indexOf('화')!= -1
-                      - if(t.course_start == 9) t.course_start = '09'
-                      - if((t.course_end - t.course_start)==2)
-                        li(class= "lecture-time two-hr hr-"+t.course_start data-event="lecture-0"+(t.id%10+1))
-                          a(href='#' data-lecture= t.id)
-                              .lecture-info
-                                h6.lecture-title #{t.course_name}
-                                h6.lecture-location #{t.course_location} 
-                              .lecture-noti(data-toggle='tooltip', data-placement='top', title='', data-original-title='과제 설명 텍스트 과제 설명 텍스트 과제 설명 텍스트')
-                                i.material-icons.ic-lecture-noti assignment
-                                span.lecture-noti-title 과제 제목 텍스트
-                      - else
-                        li(class= "lecture-time hr-"+t.course_start data-event="lecture-0"+(t.id%10+1))
-                          a(href='#' data-lecture=t.id)
-                            .lecture-info
-                              h6.lecture-title #{t.course_name}
-                              h6.lecture-location #{t.course_location} 
-                            .lecture-noti(data-toggle='tooltip', data-placement='top', title='', data-original-title='과제 설명 텍스트 과제 설명 텍스트 과제 설명 텍스트')
+                  each course in timetable.tue
+                      li(class= "lecture-time two-hr hr-2" data-event="lecture-"+course.id)
+                        a(href='#' data-lecture=course.id)
+                          .lecture-info
+                            h6.lecture-title #{course.course_name}
+                            h6.lecture-location #{course.course_location}
+                          if course.memo_id
+                            .lecture-noti(data-toggle='tooltip', data-placement='top', title='', data-original-title= course.memo_content )
                               i.material-icons.ic-lecture-noti assignment
-                              span.lecture-noti-title 과제 제목 텍스트
+                              span.lecture-noti-title #{course.memo_title}
+
               li.timeline-vertical.wed
                 .top-info
                   h4.day Wed
                 ul.wed
-                  each t in timetable
-                    if (t.course_day).indexOf('수')!= -1
-                      - if(t.course_start == 9) t.course_start = '09'
-                      - if((t.course_end - t.course_start)==2)
-                        li(class= "lecture-time two-hr hr-"+t.course_start data-event="lecture-0"+(t.id%10+1))
-                          a(href='#' data-lecture=t.id)
-                              .lecture-info
-                                h6.lecture-title #{t.course_name}
-                                h6.lecture-location #{t.course_location} 
-                              .lecture-noti(data-toggle='tooltip', data-placement='top', title='', data-original-title='과제 설명 텍스트 과제 설명 텍스트 과제 설명 텍스트')
-                                i.material-icons.ic-lecture-noti assignment
-                                span.lecture-noti-title 과제 제목 텍스트
-                      - else
-                        li(class= "lecture-time hr-"+t.course_start data-event="lecture-0"+(t.id%10+1))
-                          a(href='#' data-lecture=t.id)
-                            .lecture-info
-                              h6.lecture-title #{t.course_name}
-                              h6.lecture-location #{t.course_location} 
-                            .lecture-noti(data-toggle='tooltip', data-placement='top', title='', data-original-title='과제 설명 텍스트 과제 설명 텍스트 과제 설명 텍스트')
+                  each course in timetable.wed
+                      li(class= "lecture-time two-hr hr-2" data-event="lecture-"+course.id)
+                        a(href='#' data-lecture=course.id)
+                          .lecture-info
+                            h6.lecture-title #{course.course_name}
+                            h6.lecture-location #{course.course_location}
+                          if course.memo_id
+                            .lecture-noti(data-toggle='tooltip', data-placement='top', title='', data-original-title= course.memo_content )
                               i.material-icons.ic-lecture-noti assignment
-                              span.lecture-noti-title 과제 제목 텍스트
+                              span.lecture-noti-title #{course.memo_title}
+                  
               li.timeline-vertical
                 .top-info.thu
                   h4.day Thu
                 ul
-                  each t in timetable
-                    if (t.course_day).indexOf('목')!= -1
-                      - if(t.course_start == 9) t.course_start = '09'
-                      - if((t.course_end - t.course_start)==2)
-                        li(class= "lecture-time two-hr hr-"+t.course_start data-event="lecture-0"+(t.id%10+1))
-                          a(href='#' data-lecture=t.id)
-                              .lecture-info
-                                h6.lecture-title #{t.course_name}
-                                h6.lecture-location #{t.course_location} 
-                              .lecture-noti(data-toggle='tooltip', data-placement='top', title='', data-original-title='과제 설명 텍스트 과제 설명 텍스트 과제 설명 텍스트')
-                                i.material-icons.ic-lecture-noti assignment
-                                span.lecture-noti-title 과제 제목 텍스트
-                      - else
-                        li(class= "lecture-time hr-"+t.course_start data-event="lecture-0"+(t.id%10+1))
-                          a(href='#')
-                            .lecture-info
-                              h6.lecture-title #{t.course_name}
-                              h6.lecture-location #{t.course_location} 
-                            .lecture-noti(data-toggle='tooltip', data-placement='top', title='', data-original-title='과제 설명 텍스트 과제 설명 텍스트 과제 설명 텍스트')
-                              i.material-icons.ic-lecture-noti assignment
-                              span.lecture-noti-title 과제 제목 텍스트
+                  each course in timetable.wed
+                    if course.end - course.start == 2
+                      li(class= "lecture-time two-hr hr-"+course.course_start data-event="lecture-"+course.id)
+                    else
+                      li(class= "lecture-time hr-"+course.course_start data-event="lecture-"+course.id)
+
+                      a(href='#' data-lecture=course.id)
+                        .lecture-info
+                          h6.lecture-title #{course.course_name}
+                          h6.lecture-location #{course.course_location}
+                        if course.memo_id
+                          .lecture-noti(data-toggle='tooltip', data-placement='top', title='', data-original-title= course.memo_content )
+                            i.material-icons.ic-lecture-noti assignment
+                            span.lecture-noti-title #{course.memo_title}
               li.timeline-vertical
                 .top-info.fri
                   h4.day Fri
                 ul
-                  each t in timetable
-                    if (t.course_day).indexOf('금')!= -1
-                      - if(t.course_start == 9) t.course_start = '09'
-                      - if((t.course_end - t.course_start)==2)
-                        li(class= "lecture-time two-hr hr-"+t.course_start data-event="lecture-0"+(t.id%10+1))
-                          a(href='#' data-lecture=t.id)
-                              .lecture-info
-                                h6.lecture-title #{t.course_name}
-                                h6.lecture-location #{t.course_location} 
-                              .lecture-noti(data-toggle='tooltip', data-placement='top', title='', data-original-title='과제 설명 텍스트 과제 설명 텍스트 과제 설명 텍스트')
-                                i.material-icons.ic-lecture-noti assignment
-                                span.lecture-noti-title 과제 제목 텍스트
-                      - else
-                        li(class= "lecture-time hr-"+t.course_start data-event="lecture-0"+(t.id%10+1))
-                          a(href='#' data-lecture=t.id)
+                  each course in timetable.wed
+                        li(class= "lecture-time two-hr hr-2" data-event="lecture-"+course.id)
+                          a(href='#' data-lecture=course.id)
                             .lecture-info
-                              h6.lecture-title #{t.course_name}
-                              h6.lecture-location #{t.course_location} 
-                            .lecture-noti(data-toggle='tooltip', data-placement='top', title='', data-original-title='과제 설명 텍스트 과제 설명 텍스트 과제 설명 텍스트')
-                              i.material-icons.ic-lecture-noti assignment
-                              span.lecture-noti-title 과제 제목 텍스트
+                              h6.lecture-title #{course.course_name}
+                              h6.lecture-location #{course.course_location}
+                            if course.memo_id
+                              .lecture-noti(data-toggle='tooltip', data-placement='top', title='', data-original-title= course.memo_content )
+                                i.material-icons.ic-lecture-noti assignment
+                                span.lecture-noti-title #{course.memo_title}
 
   #modal-lecture-info.modal.fade(role='dialog', aria-hidden='true')
     .modal-dialog(role='document')

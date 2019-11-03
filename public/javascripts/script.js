@@ -134,29 +134,6 @@ $('.delete-lecture').click(function(){
     })
 })
 
-// $(document).on('click', '.submit-memo', function(){
-//   const title = $('#recipient-name').value;
-//   const content = $('#message-text').value;
-//   const tableId = $('#lecture-code').attr('data-lecture')
-//   const url = '/memos'
-//   console.log(title);
-  // fetch(url, {
-  //   method: 'POST',
-  //   headers: {
-  //     'Content-Type': 'application/json',
-  //   },
-  //   body: JSON.stringify({
-  //     title: title,
-  //     content: content,
-  //     tableId: tableId
-  //     })
-  // })
-  // .then(res=>res.json())
-  // .then(res => {
-  //   console.log(res)
-  // })
-//})
-
 // $('#delete-memo').click(function(){
 //   const memoId;
 //   const url = `/memos/${memoId}`;
