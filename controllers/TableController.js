@@ -31,6 +31,7 @@ const createTable = function(req, res){
     .then(insertData => {
         try{
             const callback = (checkData) => {
+                console.log(checkData)
                 if (checkData) {
                     models.Timetables.create(insertData) 
                     .then(result => res.send({ message: '등록되었습니다' }))
@@ -61,12 +62,11 @@ const checkTable = function(insertData, callback){
     if (days.length == 1){
         days[1] = days[0];
     }
-    models.Timetables.findOne({where: {course_code: insertData.course_code}})
-    .then(result => {
-        if(result) return false;
-        else{
-            models.Timetables.findOne({ 
-                where: {
+    models.Timetables.findOne({ 
+        where: {
+            [Op.or]:[
+                {course_code: insertData.course_code},
+                {
                     [Op.and]:[
                         { 
                             [Op.or]:[
@@ -77,15 +77,15 @@ const checkTable = function(insertData, callback){
                         { course_day: {[Op.or]:[ {[Op.like]: '%'+ days[0] +'%'}, {[Op.like]: '%'+ days[1]+'%'} ]}}
                     ]
                 }
-            })
-            .then(result => {
-                if(result) return false;
-                else return true;
-            })
-            .then(res => {
-                callback(res);
-            })
+            ]   
         }
+    })
+    .then(result => {
+        if(result) return false;
+        else return true;
+    })
+    .then(res => {
+        callback(res);
     })
 }
 
