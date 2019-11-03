@@ -15,8 +15,9 @@ router.get('/', async function(req, res, next) {
     let courses = await models.Courses.findAll()
     let tables = await models.Timetables.findAll()
     let memos = await models.Memos.findAll()
+    
     let array = []
-    let my_timetable = new Object();
+    let my_timetable = {};
     my_timetable.mon = []
     my_timetable.tue = []
     my_timetable.wed = []
@@ -36,12 +37,13 @@ router.get('/', async function(req, res, next) {
             }
           })
         })
-
+        
       for( let i=0; i < array.length; i++){
           if(array[i].id < 10) array[i].id = '0'+array[i].id
           if(array[i].course_end - array[i].course_start == 2){
             array[i].hr = 2
           }
+          else array[i].hr = 1
           if(array[i].course_day.indexOf('월')!==-1){
             my_timetable.mon.push(array[i])
           }
@@ -49,7 +51,7 @@ router.get('/', async function(req, res, next) {
             my_timetable.tue.push(array[i])
           }
           if(array[i].course_day.indexOf('수')!==-1){
-            my_timetable.web.push(array[i])
+            my_timetable.wed.push(array[i])
           }
           if(array[i].course_day.indexOf('목')!==-1){
             my_timetable.thu.push(array[i])
@@ -59,7 +61,6 @@ router.get('/', async function(req, res, next) {
           }
       }
   
-    console.log(my_timetable)
     res.render('index', {
       title: 'programmers 과제 테스트 템플릿 - Node.js', 
       courses: courses,
